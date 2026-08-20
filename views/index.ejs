@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notes App</title>
+    <link rel="stylesheet" href="stylesheets/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Fraunces:opsz,wght@9..144,600;9..144,700&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"
+      type="text/javascript"
+    ></script>
+    <script
+      src="https://cdn.tailwindcss.com/3.4.17"
+      type="text/javascript"
+    ></script>
+    <script
+      src="/_sdk/0e8d3a91e1c6f495.data_sdk.js"
+      type="text/javascript"
+      integrity="sha512-c00oDoGjsMgluCLLEyVl3suwEkgjOGGplVFbsilUoBg4aMKNmsL3mwsc9r0dPn95qiSZyjBousQXgROkAW7p/w=="
+    ></script>
+    <script
+      src="/_sdk/eba18683f23e5798.resizing_sdk.js"
+      type="text/javascript"
+      integrity="sha512-E0UWUllhwPXaNJtjyTKXWKrIE+FruPfFpO4mRmMDP2LI+U9bOizy5npCq6xx/JyWcvSK7D3TFf2wFR2Mha9kbA=="
+    ></script>
+  </head>
+
+  <body data-template-id="__page-root">
+    <div class="app-wrapper">
+      <header class="workspace-shell app-header">
+        <div>
+          <div class="identity-row">
+            <span class="identity-icon" aria-hidden="true">✦</span>
+            <span class="eyebrow">Personal workspace</span>
+          </div>
+          <p class="subtitle">
+            A quiet corner for your ideas, reminders, and things worth returning
+            to.
+          </p>
+        </div>
+      </header>
+      <main class="workspace-shell">
+        <section class="glass-panel" aria-labelledby="composer-title">
+          <div class="composer-heading">
+            <span class="composer-icon" aria-hidden="true">✎</span>
+            <div>
+              <h2 id="composer-title">Make a new note</h2>
+              <p class="composer-helper">
+                Capture it now. Your notes stay available while this page is
+                open.
+              </p>
+            </div>
+          </div>
+          <form id="note-form" action="/create" method="post">
+            <div class="field-stack">
+              <div>
+                <label class="field-label" for="note-title">Title</label>
+                <input
+                  id="note-title"
+                  type="text"
+                  maxlength="100"
+                  placeholder="e.g. Ideas for the next project"
+                  required
+                  name="title"
+                />
+              </div>
+              <div>
+                <label class="field-label" for="note-description"
+                  >Your note</label
+                >
+                <textarea
+                  id="note-description"
+                  maxlength="5000"
+                  placeholder="Write whatever is on your mind…"
+                  required
+                  name="details"
+                ></textarea>
+              </div>
+            </div>
+            <div class="control-row">
+              <button
+                id="save-note-button"
+                class="action-button primary-button"
+                type="submit"
+              >
+                Create note
+              </button>
+              <button
+                id="cancel-edit-button"
+                class="action-button secondary-button"
+                type="button"
+                hidden
+              >
+                Cancel edit
+              </button>
+              <span class="integration-note"
+                >Notes are stored for this browser session only.</span
+              >
+            </div>
+            <p
+              id="status-message"
+              class="status-message"
+              role="status"
+              aria-live="polite"
+            ></p>
+          </form>
+        </section>
+
+
+        <section class="collection-section" aria-labelledby="notes-heading">
+          <div class="collection-heading">
+            <div>
+              <h2 id="notes-heading" class="display-font">Your collection</h2>
+            </div>
+          </div>
+
+          <% if(files.length > 0){ %>
+            <div id="notes-grid" class="notes-grid flex flex-wrap gap-3">
+            <% files.forEach((val)=>{ %>
+            <article class="note-card" >
+              <p class="note-copy">
+                <%= val %> <br>
+              </p>
+              <div class="card-actions">
+                <a class="edit-button" href="/file/<%= val%>">Read More</a>
+              </div>
+            </article>
+            <% }) %>
+        </div>                  
+        <%} else{ %>
+            <article class="text-zinc-600">No task yet</article>
+        <% } %>
+
+            
+        </section>
+      </main>
+    </div>
+    <script
+      src="/_sdk/d97541380e824b1a.editing_sdk.js"
+      integrity="sha512-iBVkuiyctyjmaqUwrsoYSc/nxwymdEKZMKPeBCNj6uN/7hFPTiMVeunYJjJVnUh1GNECKEyCerl7IHtlqhzSYQ=="
+    ></script>
+    <script src="../server.js"></script>
+  </body>
+</html>
