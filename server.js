@@ -25,6 +25,7 @@ app.post('/create', (req,res)=>{
         res.redirect('/')
     })
 })
-app.listen(3000, ()=>{
-    console.log("Server Running")
-})
+
+
+
+module.exports = app;
